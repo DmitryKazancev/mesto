@@ -1,0 +1,17 @@
+.profile__button-edit{
+    margin-top: 10px;
+}
+@media screen and (max-width: 694px) {
+    .profile__button-edit {
+       
+        transform: translateX(10px);
+      }
+}
+@media screen and (max-width: 399px) {
+    .profile__button-edit {
+        width: 18px;
+        height: 18px;
+        margin-top: 8px;
+        transform: translateX(10px);
+      }
+}
