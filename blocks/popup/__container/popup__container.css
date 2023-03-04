@@ -1,5 +1,4 @@
 .popup__container{
-    
     width: 430px;
     height: 330px;
     background: white;
@@ -8,4 +7,13 @@
     position: relative;
     margin-left: calc(100vw/2 - 215px);
     margin-top: calc(100vh/2 - 165px);
+}
+@media screen and (max-width: 559px) {
+    .popup__container {
+        width: 282px;
+        height: 322px;
+        margin-left: calc(100vw/2 - 141px);
+        margin-top: calc(100vh/2 - 166px);
+        
+      }
 }
