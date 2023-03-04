@@ -1,4 +1,4 @@
 .element__button-like_disabled{
-    background-image: url('./images/button-like-disabled.svg');
+    background-image: url('../../../../images/button-like-disabled.svg');
     background-size: cover;
 }
