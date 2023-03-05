@@ -2,4 +2,11 @@
     width: 22px;
     height: 19px;
     margin-right: 20px;
+    background-color: transparent;
+    border-style: none;
+    transition: opacity 200ms ease-in-out;
+    cursor: url('../../../images/cursor.png'), pointer;
+}
+.element__button-like:hover{
+    opacity: 0.5;
 }

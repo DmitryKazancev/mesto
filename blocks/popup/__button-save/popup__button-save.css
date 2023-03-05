@@ -12,7 +12,11 @@
     text-align: center;
     color: #FFFFFF;
     border-style: none;
+    transition: opacity 200ms ease-in-out;
     cursor: url('../../../images/cursor.png'), pointer;
+}
+.popup__button-save:hover{
+  opacity: 0.8;
 }
 @media screen and (max-width: 559px) {
   .popup__button-save {
