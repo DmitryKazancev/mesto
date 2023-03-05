@@ -10,11 +10,8 @@
 @media screen and (max-width: 694px) {
     .profile__info-list {
         margin-bottom: 10px;
-        /* text-align: center;
-        display: inline-block; */
       }
     .profile__info-list:last-of-type{
         margin-bottom: 0px;
     }
-    
 }

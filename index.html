@@ -17,7 +17,7 @@
         <!--main content-->
         <main class="content">
             <!--Section PROFILE-->
-            <section class="profile">
+            <section class="profile" aria-label="Профиль автора">
                 <div class="profile__description">
                     <img src="./images/profile-avatar.jpg" alt="Аватар профиля" class="profile__avatar">
                     <ul class="profile__info">
@@ -33,7 +33,7 @@
                 <button class="profile__button-add"></button>
             </section>
             <!--Section ELEMENTS-->
-            <section class="elements">
+            <section class="elements" aria-label="Карточки с местами"> 
                 <div class="element">
                     <img src="./images/element-karachaevsk.jpg" alt="Фото Карачаевска" class="element__image">
                     <div class="element__description">
@@ -88,17 +88,19 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+    <!--Section POPUP  -->
     <section class="popup">
         <div class="popup__container">
             <button class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <div class="popup__content">
+            <form class="popup__content">
                 <input type="text" placeholder="Имя автора" class="popup__input popup__input_type_name">
-                <input type="text" placeholder="Профессия автора" class="popup__input popup__input_type_profession">
-                <button class="popup__button-save">Сохранить</button>
-            </div>
+                <input type="text" placeholder="Об авторе" class="popup__input popup__input_type_job">
+                <input type="submit" class="popup__button-save" value="Сохранить">
+            </form>
         </div>
     </section>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
