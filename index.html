@@ -20,67 +20,65 @@
             <section class="profile" aria-label="Профиль автора">
                 <div class="profile__description">
                     <img src="./images/profile-avatar.jpg" alt="Аватар профиля" class="profile__avatar">
-                    <ul class="profile__info">
-                        <li class="profile__info-list">
-                            <p class="profile__info-author">Жак-Ив Кусто</p>
-                            <button class="profile__button-edit"></button>
-                        </li>
-                        <li class="profile__info-list">
-                            <p class="profile__info-description">Исследователь океана</p>
-                        </li>
-                    </ul>
+                    <div class="profile__info">
+                        <div class="profile__info-list">
+                            <h1 class="profile__info-author">Жак-Ив Кусто</h1>
+                            <button type="button" class="profile__button-edit" aria-label="Редактировать профиль"></button>
+                        </div>
+                        <p class="profile__info-description">Исследователь океана</p> 
+                    </div>
                 </div>
-                <button class="profile__button-add"></button>
+                <button type="button" class="profile__button-add" aria-label="Добавить публикацию"></button>
             </section>
             <!--Section ELEMENTS-->
             <section class="elements" aria-label="Карточки с местами"> 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-karachaevsk.jpg" alt="Фото Карачаевска" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Карачаевск</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Карачаевск</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-elbrus.jpg" alt="Фото горы Элбьрус" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Гора Эльбрус</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Гора Эльбрус</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-dombai.jpg" alt="Фото Домбай" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Домбай</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Домбай</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-taganai.jpg" alt="Фото гор Таганай" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Таганай</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Таганай</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-nurgush.jpg" alt="Фото горы Нургуш" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Нургуш</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Нургуш</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
 
-                <div class="element">
+                <article class="element">
                     <img src="./images/element-abrau-durso.jpg" alt="Фото Абрау-Дюрсо" class="element__image">
                     <div class="element__description">
-                        <p class="element__title">Горы Абрау-Дюрсо</p>
-                        <button class="element__button-like element__button-like_disabled"></button>
+                        <h2 class="element__title">Горы Абрау-Дюрсо</h2>
+                        <button type="button" class="element__button-like element__button-like_disabled" aria-label="Поставить лайк"></button>
                     </div>
-                </div>
+                </article>
             </section>
         </main>
         <!--Section FOOTER  -->
@@ -89,17 +87,17 @@
         </footer>
     </div>
     <!--Section POPUP  -->
-    <section class="popup">
+    <div class="popup">
         <div class="popup__container">
-            <button class="popup__close"></button>
+            <button type="button" class="popup__close" aria-label="Закрыть всплывающее окно"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__content">
-                <input type="text" placeholder="Имя автора" class="popup__input popup__input_type_name">
-                <input type="text" placeholder="Об авторе" class="popup__input popup__input_type_job">
+            <form class="popup__content" name="formElement">
+                <input type="text" placeholder="Имя автора" class="popup__input popup__input_type_name" name="nameInput" required>
+                <input type="text" placeholder="Об авторе" class="popup__input popup__input_type_job" name="jobInput" required>
                 <input type="submit" class="popup__button-save" value="Сохранить">
             </form>
         </div>
-    </section>
+    </div>
     <script src="./scripts/index.js"></script>
 </body>
 

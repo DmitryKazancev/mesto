@@ -1,6 +1,7 @@
 .page{
     margin: 45px auto 60px;
     max-width: 880px;
+    min-width: 282px;
     font-family: 'Inter', 'Arial', sans-serif;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;

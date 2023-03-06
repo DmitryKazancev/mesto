@@ -11,7 +11,7 @@
     top: -40px;
     right: -40px;
     transition: opacity 200ms ease-in-out;
-    cursor: url('../../../images/cursor.png'), pointer;
+    cursor: pointer;
 }
 .popup__close:hover{
     opacity: 0.6;

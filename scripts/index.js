@@ -1,10 +1,7 @@
-//JS test
-console.log('Test Ok');
 
 //Constants
 const editButton = document.querySelector('.profile__button-edit');
 const closeButton = document.querySelector('.popup__close');
-const saveButton = document.querySelector('.popup__button-save');
 const popupWindow = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__content');
 let nameAuthor = document.querySelector('.profile__info-author');
@@ -15,8 +12,13 @@ let jobInput = document.querySelector('.popup__input_type_job');
 //Open popup window function
 function openPopup () {
     popupWindow.classList.add('popup_opened');
-    nameInput.value = nameAuthor.innerHTML;
-    jobInput.value = jobAuthor.innerHTML;
+    nameInput.value = nameAuthor.textContent;
+    jobInput.value = jobAuthor.textContent;
+};
+
+//Close popup window function
+function closePopup () {
+    popupWindow.classList.remove('popup_opened');
 };
 
 //Submit info from popup function
@@ -28,6 +30,6 @@ function handleFormSubmit (evt) {
 };
 
 editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', function () {popupWindow.classList.remove('popup_opened')});
+closeButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', handleFormSubmit); 
 
