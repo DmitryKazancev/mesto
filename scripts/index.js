@@ -26,7 +26,7 @@ function handleFormSubmit (evt) {
     evt.preventDefault();
     nameAuthor.textContent = nameInput.value;
     jobAuthor.textContent = jobInput.value;
-    popupWindow.classList.remove('popup_opened');
+    closePopup();
 };
 
 editButton.addEventListener('click', openPopup);
