@@ -13,9 +13,9 @@ let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_job');
 let cardName = document.querySelector('.popup__input_card_name');
 let cardUrl = document.querySelector('.popup__input_card_url');
-const authorPopup = document.querySelector('.popup__author');
-const cardPopup = document.querySelector('.popup__card');
-const imagePopup = document.querySelector('.popup__image');
+const authorPopup = document.querySelector('.popup_author');
+const cardPopup = document.querySelector('.popup_card');
+const imagePopup = document.querySelector('.popup_image');
 
 const initialCards = [
     {
@@ -63,11 +63,11 @@ function closePopup () {
 //Submit info from popup function
 function handleFormSubmit (evt) {
     evt.preventDefault();
-    if (authorPopup.classList.value === "popup popup__author popup_opened") {
+    if (authorPopup.classList.value === "popup popup_author popup_opened") {
         nameAuthor.textContent = nameInput.value;
         jobAuthor.textContent = jobInput.value;
     }
-    if (cardPopup.classList.value === "popup popup__card popup_opened") {
+    if (cardPopup.classList.value === "popup popup_card popup_opened") {
         addCard();  
     }
     closePopup();
@@ -107,6 +107,7 @@ function addCard () {
     const elementTemplate = document.querySelector('#element').content;
     const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
     const trashButton =  elementCard.querySelector('.element__button-trash');
+    const imageButton = elementCard.querySelector('.element__image');
 
     elementCard.querySelector('.element__image').src = cardUrl.value;
     elementCard.querySelector('.element__title').textContent = cardName.value;
@@ -118,7 +119,15 @@ function addCard () {
     trashButton.addEventListener('click', function () {
         const currentCard = trashButton.closest('.element');
         currentCard.remove();
-      }); 
+      });
+    
+    imageButton.addEventListener('click', function() {
+        imagePopup.classList.add('popup_opened');
+        imagePopup.querySelector('.popup__image-title').textContent = elementCard.querySelector('.element__title').textContent;
+        imagePopup.querySelector('.popup__image-view').src = elementCard.querySelector('.element__image').src;
+    })
+
+    
 }
 
 //Open popup author
