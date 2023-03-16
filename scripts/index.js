@@ -1,13 +1,21 @@
 
 //Constants
 const editButton = document.querySelector('.profile__button-edit');
-const closeButton = document.querySelector('.popup__close');
+const addButton = document.querySelector('.profile__button-add');
+const closeButtonAuthor = document.querySelector('.popup__close-author');
+const closeButtonAdd = document.querySelector('.popup__close-card');
 const popupWindow = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__content');
+let formElementCard = document.querySelector('.popup__content-card');
 let nameAuthor = document.querySelector('.profile__info-author');
 let jobAuthor = document.querySelector('.profile__info-description');
 let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_job');
+let cardName = document.querySelector('.popup__input_card_name');
+let cardUrl = document.querySelector('.popup__input_card_url');
+const authorPopup = document.querySelector('.popup__author');
+const cardPopup = document.querySelector('.popup__card');
+
 
 const initialCards = [
     {
@@ -36,41 +44,97 @@ const initialCards = [
     }
   ]; 
 
+
 //Open popup window function
-function openPopup () {
-    popupWindow.classList.add('popup_opened');
-    nameInput.value = nameAuthor.textContent;
-    jobInput.value = jobAuthor.textContent;
+function openPopup (popup) {
+    popup.classList.add('popup_opened');
+    if (popup === authorPopup) {
+        nameInput.value = nameAuthor.textContent;
+        jobInput.value = jobAuthor.textContent;
+    }
 };
 
 //Close popup window function
 function closePopup () {
-    popupWindow.classList.remove('popup_opened');
+    cardPopup.classList.remove('popup_opened');
+    authorPopup.classList.remove('popup_opened');
 };
 
 //Submit info from popup function
 function handleFormSubmit (evt) {
     evt.preventDefault();
-    nameAuthor.textContent = nameInput.value;
-    jobAuthor.textContent = jobInput.value;
+    if (authorPopup.classList.value === "popup popup__author popup_opened") {
+        nameAuthor.textContent = nameInput.value;
+        jobAuthor.textContent = jobInput.value;
+    }
+    if (cardPopup.classList.value === "popup popup__card popup_opened") {
+        addCard();  
+    }
     closePopup();
 };
 
-
-
-editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
-formElement.addEventListener('submit', handleFormSubmit); 
-
-//add cards 
+//create six card
 initialCards.forEach((card) => {
     const elementsSection = document.querySelector('.elements');
     const elementTemplate = document.querySelector('#element').content;
     const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
+    const trashButton =  elementCard.querySelector('.element__button-trash');
 
     elementCard.querySelector('.element__image').src = card.link;
     elementCard.querySelector('.element__title').textContent = card.name;
     elementsSection.append(elementCard);
+
+    elementCard.querySelector('.element__button-like').addEventListener('click', function (evt) {
+        evt.target.classList.toggle('element__button-like_active');
+      }); 
+
+    trashButton.addEventListener('click', function () {
+        const currentCard = trashButton.closest('.element');
+        currentCard.remove();
+      }); 
 });
+
+function addCard () {
+    const elementsSection = document.querySelector('.elements');
+    const elementTemplate = document.querySelector('#element').content;
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
+    const trashButton =  elementCard.querySelector('.element__button-trash');
+
+    elementCard.querySelector('.element__image').src = cardUrl.value;
+    elementCard.querySelector('.element__title').textContent = cardName.value;
+    elementsSection.prepend(elementCard);
+    elementCard.querySelector('.element__button-like').addEventListener('click', function (evt) {
+        evt.target.classList.toggle('element__button-like_active');
+      }); 
+
+    trashButton.addEventListener('click', function () {
+        const currentCard = trashButton.closest('.element');
+        currentCard.remove();
+      }); 
+}
+
+//Open popup author
+editButton.addEventListener('click', () => {
+    openPopup(authorPopup);
+});
+
+addButton.addEventListener('click', () => {
+    openPopup(cardPopup);
+});
+
+//Close popup
+closeButtonAuthor.addEventListener('click', closePopup);
+closeButtonAdd.addEventListener('click', closePopup);
+
+//Submit edit author form button
+formElement.addEventListener('submit', handleFormSubmit); 
+//Submit add card form button
+formElementCard.addEventListener('submit', handleFormSubmit);
+
+
+
+
+
+
 
 
