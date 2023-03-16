@@ -4,6 +4,7 @@ const editButton = document.querySelector('.profile__button-edit');
 const addButton = document.querySelector('.profile__button-add');
 const closeButtonAuthor = document.querySelector('.popup__close-author');
 const closeButtonAdd = document.querySelector('.popup__close-card');
+const closeButtonImage = document.querySelector('.popup__close-image');
 const popupWindow = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__content');
 let formElementCard = document.querySelector('.popup__content-card');
@@ -15,6 +16,7 @@ let cardName = document.querySelector('.popup__input_card_name');
 let cardUrl = document.querySelector('.popup__input_card_url');
 const authorPopup = document.querySelector('.popup__author');
 const cardPopup = document.querySelector('.popup__card');
+const imagePopup = document.querySelector('.popup__image');
 
 
 const initialCards = [
@@ -58,6 +60,7 @@ function openPopup (popup) {
 function closePopup () {
     cardPopup.classList.remove('popup_opened');
     authorPopup.classList.remove('popup_opened');
+    imagePopup.classList.remove('popup_opened');
 };
 
 //Submit info from popup function
@@ -78,7 +81,8 @@ initialCards.forEach((card) => {
     const elementsSection = document.querySelector('.elements');
     const elementTemplate = document.querySelector('#element').content;
     const elementCard = elementTemplate.querySelector('.element').cloneNode(true);
-    const trashButton =  elementCard.querySelector('.element__button-trash');
+    const trashButton = elementCard.querySelector('.element__button-trash');
+    const imageButton = elementCard.querySelector('.element__image');
 
     elementCard.querySelector('.element__image').src = card.link;
     elementCard.querySelector('.element__title').textContent = card.name;
@@ -92,6 +96,18 @@ initialCards.forEach((card) => {
         const currentCard = trashButton.closest('.element');
         currentCard.remove();
       }); 
+
+    imageButton.addEventListener('click', function() {
+        imagePopup.classList.add('popup_opened');
+        imagePopup.querySelector('.popup__image-title').textContent = elementCard.querySelector('.element__title').textContent;
+        imagePopup.querySelector('.popup__image-view').src = elementCard.querySelector('.element__image').src;
+    })
+
+
+    
+    // elementCard.querySelector('.element__image').addEventListener('click', function () {
+    //     evt.target.classList.add('element__button-like_active');
+    //   }); 
 });
 
 function addCard () {
@@ -125,6 +141,7 @@ addButton.addEventListener('click', () => {
 //Close popup
 closeButtonAuthor.addEventListener('click', closePopup);
 closeButtonAdd.addEventListener('click', closePopup);
+closeButtonImage.addEventListener('click', closePopup);
 
 //Submit edit author form button
 formElement.addEventListener('submit', handleFormSubmit); 
