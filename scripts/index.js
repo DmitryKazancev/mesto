@@ -5,7 +5,6 @@ const addButton = document.querySelector('.profile__button-add');
 const closeButtonAuthor = document.querySelector('.popup__close-author');
 const closeButtonAdd = document.querySelector('.popup__close-card');
 const closeButtonImage = document.querySelector('.popup__close-image');
-const popupWindow = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__content');
 let formElementCard = document.querySelector('.popup__content-card');
 let nameAuthor = document.querySelector('.profile__info-author');
@@ -17,7 +16,6 @@ let cardUrl = document.querySelector('.popup__input_card_url');
 const authorPopup = document.querySelector('.popup__author');
 const cardPopup = document.querySelector('.popup__card');
 const imagePopup = document.querySelector('.popup__image');
-
 
 const initialCards = [
     {
@@ -45,7 +43,6 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
-
 
 //Open popup window function
 function openPopup (popup) {
@@ -76,7 +73,7 @@ function handleFormSubmit (evt) {
     closePopup();
 };
 
-//create six card
+//Create six card
 initialCards.forEach((card) => {
     const elementsSection = document.querySelector('.elements');
     const elementTemplate = document.querySelector('#element').content;
@@ -102,14 +99,9 @@ initialCards.forEach((card) => {
         imagePopup.querySelector('.popup__image-title').textContent = elementCard.querySelector('.element__title').textContent;
         imagePopup.querySelector('.popup__image-view').src = elementCard.querySelector('.element__image').src;
     })
-
-
-    
-    // elementCard.querySelector('.element__image').addEventListener('click', function () {
-    //     evt.target.classList.add('element__button-like_active');
-    //   }); 
 });
 
+//Add card function
 function addCard () {
     const elementsSection = document.querySelector('.elements');
     const elementTemplate = document.querySelector('#element').content;
@@ -134,6 +126,7 @@ editButton.addEventListener('click', () => {
     openPopup(authorPopup);
 });
 
+//Open popup card
 addButton.addEventListener('click', () => {
     openPopup(cardPopup);
 });
