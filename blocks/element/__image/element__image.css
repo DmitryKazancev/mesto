@@ -5,4 +5,5 @@
     border-top-left-radius: 10px;
     margin-bottom: 25px;
     object-fit: cover;
+    cursor: pointer;
 }
