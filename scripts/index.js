@@ -13,6 +13,10 @@ const authorPopup = document.querySelector('.popup_author');
 const cardPopup = document.querySelector('.popup_card');
 const imagePopup = document.querySelector('.popup_image');
 const cardTemplate = document.querySelector('#element').content.querySelector('.element');
+const elementsSection = document.querySelector('.elements');
+const imageTitle = document.querySelector('.popup__image-title');
+const imageView = document.querySelector('.popup__image-view');
+
 
 //Open popup window functions
 function openPopup (popup) {
@@ -69,9 +73,9 @@ function createCard (card) {
       });
     imageButton.addEventListener('click', function() {
         openPopup(imagePopup);
-        imagePopup.querySelector('.popup__image-title').textContent = card.name;
-        imagePopup.querySelector('.popup__image-view').src = imageButton.src;
-        imagePopup.querySelector('.popup__image-view').alt = card.name;
+        imageTitle.textContent = card.name;
+        imageView.src = card.link;
+        imageView.alt = card.name;
     })
 
     return elementCard;
@@ -79,7 +83,6 @@ function createCard (card) {
 
 //Render card function
 function renderCard (card) {
-    const elementsSection = document.querySelector('.elements');
     elementsSection.prepend(createCard(card));
 }
 
