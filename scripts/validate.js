@@ -1,6 +1,6 @@
 //Configuration object
 const validationConfig = {
-    formSelector: '.popup__form',
+    formSelector: '.popup__content',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_invalid',
@@ -11,14 +11,11 @@ const validationConfig = {
 //Validation function
 const enableValidation = ({formSelector, ...rest}) => {
     const forms = Array.from(document.querySelectorAll(formSelector));
-    console.log(forms);
     forms.forEach(form => {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            console.log('2')
         })
         setEventListeners(form, rest);
-        console.log('3')
     })
 }
 
