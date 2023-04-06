@@ -40,26 +40,30 @@
         </footer>
     </div>
     <!--Section POPUP Author add -->
-    <div class="popup popup_author">
+    <div class="popup popup__form popup_author">
         <div class="popup__container">
             <button type="button" class="popup__close popup__close-author" aria-label="Закрыть всплывающее окно"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__content popup__content-author" name="authorEdit">
-                <input type="text" placeholder="Имя автора" class="popup__input popup__input_type_name" name="nameInput" required>
-                <input type="text" placeholder="Об авторе" class="popup__input popup__input_type_job" name="jobInput" required>
-                <button type="submit" class="popup__button-save" aria-label="Сохранить">Сохранить</button>
+            <form class="popup__content popup__content-author" name="authorEdit" novalidate>
+                <input id="name-author" type="text" placeholder="Имя автора" class="popup__input popup__input_type_name" name="nameInput" minlength="2" maxlength="40" required>
+                <span id="name-author-error" class="popup__error popup__error_field_first"></span>
+                <input id="about-author" type="text" placeholder="Об авторе" class="popup__input popup__input_type_job" name="jobInput" minlength="2" maxlength="200" required>
+                <span id="about-author-error" class="popup__error popup__error_field_second"></span>
+                <button type="submit" class="popup__button" aria-label="Сохранить">Сохранить</button>
             </form>
         </div>
     </div>
     <!--Section POPUP Card add -->
-    <div class="popup popup_card">
+    <div class="popup popup__form popup_card">
         <div class="popup__container">
             <button type="button" class="popup__close popup__close-card" aria-label="Закрыть всплывающее окно"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__content popup__content-card" name="cardEdit">
-                <input type="text" placeholder="Название" class="popup__input popup__input_card_name" name="nameCardInput" required>
-                <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_card_url" name="srcCardInput" required>
-                <button type="submit" class="popup__button-save" aria-label="Создать">Создать</button>
+            <form class="popup__content popup__content-card" name="cardEdit" novalidate>
+                <input id="name-card" type="text" placeholder="Название" class="popup__input popup__input_card_name" name="nameCardInput" minlength="2" maxlength="20" required>
+                <span id="name-card-error" class="popup__error popup__error_field_first"></span>
+                <input id="link-card" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_card_url" name="srcCardInput" required>
+                <span id="link-card-error" class="popup__error popup__error_field_second"></span>
+                <button type="submit" class="popup__button" aria-label="Создать">Создать</button>
             </form>
         </div>
     </div>
@@ -83,6 +87,7 @@
         </article>
     </template>
     <script src="./scripts/cards.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 

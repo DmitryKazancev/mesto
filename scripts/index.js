@@ -21,29 +21,36 @@ const imageView = document.querySelector('.popup__image-view');
 //Open popup window functions
 function openPopup (popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupEscButton);
+    popup.addEventListener("click", closePopupClick);
 };
 
 function openAuthorPopup(popup) { 
     nameInput.value = nameAuthor.textContent;
     jobInput.value = jobAuthor.textContent;
     openPopup(popup);
-    } 
+}; 
 
 //Close popup window function
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupEscButton);
+    popup.removeEventListener("click", closePopupClick);
 };
 
 //Submit info from popup function
 function handleFormSubmitAuthor (evt) {
     evt.preventDefault();
+    const saveButton = authorPopup.querySelector('.popup__button');
     nameAuthor.textContent = nameInput.value;
     jobAuthor.textContent = jobInput.value;
     closePopup(authorPopup);
+    disableButton(saveButton, validationConfig);
 };
 
 function handleFormSubmitCard (evt) {
     evt.preventDefault();
+    const saveButton = cardPopup.querySelector('.popup__button');
     const cardInfo = 
     {
         name: cardName.value,
@@ -53,6 +60,7 @@ function handleFormSubmitCard (evt) {
     cardName.value = "";
     cardUrl.value = "";
     closePopup(cardPopup);
+    disableButton(saveButton, validationConfig);
 };
 
 //Create card function
@@ -77,7 +85,6 @@ function createCard (card) {
         imageView.src = card.link;
         imageView.alt = card.name;
     })
-
     return elementCard;
 }
 
@@ -86,11 +93,26 @@ function renderCard (card) {
     elementsSection.prepend(createCard(card));
 }
 
+//Close by Escape function
+function closePopupEscButton (evt) {
+    if (evt.key === 'Escape') {
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
+    }
+}
+
+//Close by Click function
+function closePopupClick (evt) {
+    if (evt.currentTarget === evt.target) {
+        const openPopup = document.querySelector('.popup_opened');
+        closePopup(openPopup);
+    }
+  }
+
 //Create six cards
 initialCards.reverse().forEach ((card) => {
     renderCard(card);
 });
-
 
 //Open popup author
 editButton.addEventListener('click', () => {
@@ -113,3 +135,4 @@ formElementAuthor.addEventListener('submit', handleFormSubmitAuthor);
 
 //Submit add card form button
 formElementCard.addEventListener('submit', handleFormSubmitCard);
+

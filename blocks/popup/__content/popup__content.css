@@ -1,5 +1,6 @@
 .popup__content{
     display: flex;
+    position: relative;
     flex-direction: column;
     margin: 46px auto 0;
     gap: 30px;
