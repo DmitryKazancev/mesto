@@ -1,3 +1,7 @@
+//Imports
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 //Constants
 const editButton = document.querySelector('.profile__button-edit');
 const addButton = document.querySelector('.profile__button-add');
@@ -12,11 +16,55 @@ const cardUrl = document.querySelector('.popup__input_card_url');
 const authorPopup = document.querySelector('.popup_author');
 const cardPopup = document.querySelector('.popup_card');
 const imagePopup = document.querySelector('.popup_image');
-const cardTemplate = document.querySelector('#element').content.querySelector('.element');
 const elementsSection = document.querySelector('.elements');
 const imageTitle = document.querySelector('.popup__image-title');
 const imageView = document.querySelector('.popup__image-view');
+const templateSelector = '#element';
 
+//Cards data
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ]; 
+
+//Configuration object
+const validationConfig = {
+    formSelector: '.popup__content',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_invalid',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+    }
+
+//Disable button function when open popup
+function disableButtonOpenPopup (popup) {
+    const currentSubmitButton = popup.querySelector('.popup__button');
+    currentSubmitButton.classList.add('popup__button_invalid');
+    currentSubmitButton.setAttribute('disabled', '');
+}
 
 //Open popup window functions
 function openPopup (popup) {
@@ -31,6 +79,14 @@ function openAuthorPopup(popup) {
     openPopup(popup);
 }; 
 
+//Open popup image function
+export default function openPopupImage(card) {
+    openPopup(imagePopup);
+    imageTitle.textContent = card.name;
+    imageView.src = card.link;
+    imageView.alt = card.name;
+}
+
 //Close popup window function
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
@@ -38,14 +94,14 @@ function closePopup (popup) {
     popup.removeEventListener("click", closePopupClick);
 };
 
-//Submit info from popup function
+//Submit info from popups functions
 function handleFormSubmitAuthor (evt) {
     evt.preventDefault();
     const saveButton = authorPopup.querySelector('.popup__button');
     nameAuthor.textContent = nameInput.value;
     jobAuthor.textContent = jobInput.value;
     closePopup(authorPopup);
-    disableButton(saveButton, validationConfig);
+    disableButtonOpenPopup(authorPopup);
 };
 
 function handleFormSubmitCard (evt) {
@@ -56,42 +112,13 @@ function handleFormSubmitCard (evt) {
         name: cardName.value,
         link: cardUrl.value
     };
-    renderCard(cardInfo);
+    const card = new Card (cardInfo, templateSelector, openPopup);
+    renderCard(card.createCard());
     cardName.value = "";
     cardUrl.value = "";
     closePopup(cardPopup);
-    disableButton(saveButton, validationConfig);
+    disableButtonOpenPopup(cardPopup);
 };
-
-//Create card function
-function createCard (card) {
-    const elementsSection = document.querySelector('.elements');
-    const elementCard = cardTemplate.cloneNode(true);
-    const trashButton =  elementCard.querySelector('.element__button-trash');
-    const imageButton = elementCard.querySelector('.element__image');
-
-    imageButton.src = card.link;
-    imageButton.alt = card.name;
-    elementCard.querySelector('.element__title').textContent = card.name;
-    elementCard.querySelector('.element__button-like').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__button-like_active');
-      }); 
-    trashButton.addEventListener('click', function () {
-        elementCard.remove();
-      });
-    imageButton.addEventListener('click', function() {
-        openPopup(imagePopup);
-        imageTitle.textContent = card.name;
-        imageView.src = card.link;
-        imageView.alt = card.name;
-    })
-    return elementCard;
-}
-
-//Render card function
-function renderCard (card) {
-    elementsSection.prepend(createCard(card));
-}
 
 //Close by Escape function
 function closePopupEscButton (evt) {
@@ -108,11 +135,6 @@ function closePopupClick (evt) {
         closePopup(openPopup);
     }
   }
-
-//Create six cards
-initialCards.reverse().forEach ((card) => {
-    renderCard(card);
-});
 
 //Open popup author
 editButton.addEventListener('click', () => {
@@ -136,3 +158,22 @@ formElementAuthor.addEventListener('submit', handleFormSubmitAuthor);
 //Submit add card form button
 formElementCard.addEventListener('submit', handleFormSubmitCard);
 
+//Render card function
+function renderCard (card) {
+    elementsSection.prepend(card);
+}
+
+//Create six cards
+initialCards.reverse().forEach (element => {
+    const card = new Card (element, templateSelector, cardPopup);
+    renderCard(card.createCard());
+});
+
+//Set validation to popup forms
+ const addCardFormValidation = new FormValidator (validationConfig, formElementCard);
+ console.log(addCardFormValidation);
+ addCardFormValidation.enableValidation();
+
+ const editAuthorFormValidation = new FormValidator (validationConfig, formElementAuthor);
+ console.log(editAuthorFormValidation);
+ editAuthorFormValidation.enableValidation();
