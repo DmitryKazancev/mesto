@@ -1,6 +1,3 @@
-//Imports
-import openPopupImage from "./index.js";
-
 //Create card class
 export default class Card {
     constructor(initialCard, templateSelector, openPopupImage) {
@@ -21,6 +18,7 @@ export default class Card {
     //Delete card
     _deleteCard = () => {
         this._elementCard.remove();
+        this._elementCard = null;
         };
     
     //Switch like
@@ -30,7 +28,7 @@ export default class Card {
 
     //Open popup with image
     _openPopupCurrentImage = () => {
-        openPopupImage(this._initialCard);
+        this._openPopupImage(this._initialCard);
     }
 
     //Set listeners for like button, trash button and card image

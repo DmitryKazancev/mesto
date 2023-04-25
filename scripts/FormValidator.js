@@ -25,7 +25,7 @@ export default class FormValidator {
     }
 
     //Disable submit button
-    _disableButton () {
+    disableButton () {
         this._formButton.classList.add(this._inactiveButtonClass);
         this._formButton.setAttribute('disabled', '');
     }
@@ -33,7 +33,7 @@ export default class FormValidator {
     //On or Off submit button on form
     _switchButtonForm () {
         if (this._hasInvalidInput(this._formInputs)) {
-            this._disableButton(this._formButton);
+            this.disableButton(this._formButton);
         }
         else{
             this._enableButton(this._formButton);
@@ -67,7 +67,7 @@ export default class FormValidator {
 
     //Enable validation public method
     enableValidation(){
-        this._disableButton();
+        this.disableButton();
         this._setEventListeners();
     }
 
