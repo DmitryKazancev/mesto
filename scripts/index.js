@@ -66,7 +66,6 @@ function handleFormSubmitAuthor (evt) {
     nameAuthor.textContent = nameInput.value;
     jobAuthor.textContent = jobInput.value;
     closePopup(authorPopup);
-    const authorEditFormValidation = new FormValidator (validationConfig, formElementAuthor);
     authorEditFormValidation.disableButton();
 };
 
@@ -82,7 +81,6 @@ function handleFormSubmitCard (evt) {
     cardName.value = "";
     cardUrl.value = "";
     closePopup(cardPopup);
-    const cardAddFormValidation = new FormValidator (validationConfig, formElementCard);
     cardAddFormValidation.disableButton();
 };
 
