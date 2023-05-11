@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Проект: Место</title>
 </head>
 
@@ -12,14 +11,14 @@
     <div class="page">
         <!--Section HEADER-->
         <header class="header">
-            <img src="./images/logo-header.svg" alt="Логотип сайта Место" class="header__logo">
+            <img src="<%=require('./images/logo-header.svg')%>" alt="Логотип сайта Место" class="header__logo">
         </header>
         <!--main content-->
         <main class="content">
             <!--Section PROFILE-->
             <section class="profile" aria-label="Профиль автора">
                 <div class="profile__description">
-                    <img src="./images/profile-avatar.jpg" alt="Аватар профиля" class="profile__avatar">
+                    <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Аватар профиля" class="profile__avatar">
                     <div class="profile__info">
                         <div class="profile__info-list">
                             <h1 class="profile__info-author">Жак-Ив Кусто</h1>
@@ -59,9 +58,9 @@
             <button type="button" class="popup__close popup__close-card" aria-label="Закрыть всплывающее окно"></button>
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__content popup__content-card" name="cardEdit" novalidate>
-                <input id="name-card" type="text" placeholder="Название" class="popup__input popup__input_card_name" name="nameCardInput" minlength="2" maxlength="20" required>
+                <input id="name-card" type="text" placeholder="Название" class="popup__input popup__input_card_name" name="cardName" minlength="2" maxlength="20" required>
                 <span id="name-card-error" class="popup__error popup__error_field_first"></span>
-                <input id="link-card" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_card_url" name="srcCardInput" required>
+                <input id="link-card" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_card_url" name="link" required>
                 <span id="link-card-error" class="popup__error popup__error_field_second"></span>
                 <button type="submit" class="popup__button" aria-label="Создать">Создать</button>
             </form>
@@ -86,7 +85,6 @@
             </div>
         </article>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>

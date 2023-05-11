@@ -4,7 +4,7 @@ export default class Card {
         this._initialCard = initialCard;
         this._templateSelector = templateSelector;
         this._openPopupImage = openPopupImage;
-        this._name = initialCard.name;
+        this._name = initialCard.cardName;
         this._link = initialCard.link;
         this._elementCard = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
         this._trashButton =  this._elementCard.querySelector('.element__button-trash');
@@ -13,6 +13,9 @@ export default class Card {
         this._imageButton.src = this._link;
         this._imageButton.alt = this._name;
         this._elementCard.querySelector('.element__title').textContent = this._name;
+        this._imagePopup = document.querySelector('.popup_image');
+        this._imageView = document.querySelector('.popup__image-view');
+        this._imageTitle = document.querySelector('.popup__image-title');
     }
 
     //Delete card

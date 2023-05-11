@@ -70,5 +70,4 @@ export default class FormValidator {
         this.disableButton();
         this._setEventListeners();
     }
-
  }
