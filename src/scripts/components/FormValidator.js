@@ -13,6 +13,15 @@ export default class FormValidator {
         this._formButton = this._formElement.querySelector(this._submitButtonSelector);
     }
 
+    //delete inputs error function
+    deleteInputError () {
+        this._formInputs.forEach(input => {
+            const currentInputErrorContainer = document.querySelector(`#${input.id}-error`);
+            currentInputErrorContainer.classList.remove(this._errorClass);
+            input.classList.remove(this._inputErrorClass);
+        })
+    }
+
     // Check validity (return true or false)
     _hasInvalidInput () {
         return this._formInputs.some(item => !item.validity.valid);

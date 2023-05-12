@@ -9,8 +9,21 @@ export default class PopupWithForm extends Popup {
       this._inputsList = this._formWithInputs.querySelectorAll('.popup__input');
     }
 
+    //set event listeners for close and submit button popup
+    setEventListeners () {
+        super.setEventListeners();
+        this._formWithInputs.addEventListener('submit', this._handleSubmitButton);
+    }
+
+    //handle submit button function
+    _handleSubmitButton = (evt) => {
+        evt.preventDefault();
+        this._submitFormFunction(this._getInputValues());
+        this.close();
+    }
+
     //get info from input fields
-    getInputValues () {
+    _getInputValues () {
         this._infoFromInputs = {};
         this._inputsList.forEach(input => {
             this._infoFromInputs[input.name] = input.value;
@@ -25,17 +38,10 @@ export default class PopupWithForm extends Popup {
         })
     }
 
-    //set event listeners for close and submit button popup
-    setEventListeners () {
-        super.setEventListeners();
-        this._formWithInputs.addEventListener('submit', this._submitFormFunction)
-    }
-
     //close popup function
     close () {
-        this._formWithInputs.reset();
         super.close();
-        
-       
+        this._formWithInputs.removeEventListener('submit', this._handleSubmitButton);
+        this._formWithInputs.reset();
     }
 }

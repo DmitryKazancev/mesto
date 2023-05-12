@@ -27,6 +27,10 @@ const initialCards = [
   ]; 
 
 //Constants
+const buttonEdit = document.querySelector('.profile__button-edit');
+const buttonAdd = document.querySelector('.profile__button-add');
+const formElementAuthor = document.querySelector('.popup__content-author');
+const formElementCard = document.querySelector('.popup__content-card');
 const templateSelector = '#element';
 const elementSelector = '.elements';
 const nameAuthorSelector = '.profile__info-author';
@@ -56,5 +60,9 @@ export {
   popupAuthorSelector, 
   popupCardSelector, 
   imagePopupSelector, 
-  validationConfig
+  validationConfig,
+  buttonEdit,
+  buttonAdd,
+  formElementAuthor,
+  formElementCard
 }
