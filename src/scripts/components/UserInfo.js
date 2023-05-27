@@ -1,8 +1,9 @@
 //UserInfo class
 export default class UserInfo {
-    constructor({nameAuthorSelector, jobAuthorSelector}) {
+    constructor({nameAuthorSelector, jobAuthorSelector, avatarSelector}) {
         this._nameAuthor = document.querySelector(nameAuthorSelector);
         this._jobAuthor = document.querySelector(jobAuthorSelector);
+        this._userAvatar = document.querySelector('.profile__avatar');
     }
 
     //get current user info from page
@@ -12,7 +13,8 @@ export default class UserInfo {
 
     //set user info to page from inputs
     setUserInfo (userInfo) {
-        this._nameAuthor.textContent = userInfo.nameInput;
-        this._jobAuthor.textContent = userInfo.jobInput;
+        this._nameAuthor.textContent = userInfo.name;
+        this._jobAuthor.textContent = userInfo.about;
+        this._userAvatar.src = userInfo.avatar;
     }
 }

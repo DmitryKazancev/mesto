@@ -14,13 +14,28 @@ import {
   buttonEdit,
   buttonAdd,
   formElementAuthor,
-  formElementCard } from './scripts/utils/constants.js';
+  formElementCard,
+  formElementAvatar,
+  popupAvatarSelector,
+  popupCardRemoveSelector,
+  buttonUpdateAvatar } from './scripts/utils/constants.js';
 import Card from './scripts/components/Card.js';
 import FormValidator from './scripts/components/FormValidator.js';
 import UserInfo from './scripts/components/UserInfo.js';
 import PopupWithImage from './scripts/components/PopupWithImage.js';
 import Section from './scripts/components/Section.js';
 import PopupWithForm from './scripts/components/PopupWithForm.js';
+import PopupCardRemove from './scripts/components/PopupCardRemove.js';
+import Api from './scripts/components/Api.js';
+
+//class api for connect to server
+const api = new Api ({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: '0be97cdd-5214-4857-975b-3ef352f3ad1f',
+    'Content-Type': 'application/json'
+  }
+}); 
 
 //image popup
 const imagePopupWindow = new PopupWithImage (imagePopupSelector);
@@ -28,14 +43,58 @@ const imagePopupWindow = new PopupWithImage (imagePopupSelector);
 //info about author
 const userInfo = new UserInfo({nameAuthorSelector, jobAuthorSelector});
 
+//popup remove card
+const popupCardRemove = new PopupCardRemove (popupCardRemoveSelector, ({elementCard, elementCardId}) => {
+  api.deleteCard(elementCardId)
+    .then(() => {
+      elementCard.removeCard();
+      popupCardRemove.disableSubmitListener();
+      popupCardRemove.close();
+      popupCardRemove.setCurrentTextButton();
+    })
+    .catch(error => {
+      console.error(`Ошибка при при удалении карточки ${error}`)
+    })
+})
+
 //popup edit author
 const popupAuthor = new PopupWithForm (popupAuthorSelector, (inputsValues) => {
-  userInfo.setUserInfo(inputsValues);
+  api.setOwnerInfo(inputsValues)
+    .then(res => {
+      userInfo.setUserInfo(res);
+      popupAuthor.close();
+      popupAuthor.setCurrentTextButton();
+    })
+    .catch(error => {
+      console.error(`Ошибка при редактировании профиля автора ${error}`)
+    })
 })
 
 //popup edit card
 const popupCard = new PopupWithForm (popupCardSelector, (inputsValues) => {
-  sectionCards.addItem(sectionCards.renderer(inputsValues));
+  Promise.all([api.getUserInfo(), api.addNewCard(inputsValues)])
+    .then(([infoUser, infoCard]) => {
+      infoCard.userId = infoUser._id;
+      sectionCards.addItem(sectionCards.renderer(infoCard))
+      popupCard.close();
+      popupCard.setCurrentTextButton();
+    })
+    .catch(error => {
+      console.error(`Ошибка при добавлении новой карточки ${error}`)
+    })
+})
+
+//popup update avatar
+const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, (inputsValues) => {
+  api.setOwnerAvatar(inputsValues)
+    .then(res => {
+      userInfo.setUserInfo(res);
+      popupUpdateAvatar.close();
+      popupUpdateAvatar.setCurrentTextButton();
+    } )
+    .catch(error => {
+      console.error(`Ошибка при изменении аватара автора ${error}`)
+    })
 })
 
 //Set validation to popup forms
@@ -44,6 +103,17 @@ cardAddFormValidation.enableValidation();
 
 const authorEditFormValidation = new FormValidator (validationConfig, formElementAuthor);
 authorEditFormValidation.enableValidation();
+
+const avatarUpdateFormValidation = new FormValidator(validationConfig, formElementAvatar);
+avatarUpdateFormValidation.enableValidation();
+
+//open popup for update avatar
+buttonUpdateAvatar.addEventListener('click', () => {
+  popupUpdateAvatar.open();
+  avatarUpdateFormValidation.deleteInputError();
+  popupUpdateAvatar.setEventListeners();
+  avatarUpdateFormValidation.disableButton();
+})
 
 //Open popup author
 buttonEdit.addEventListener('click', () => {
@@ -66,11 +136,40 @@ buttonAdd.addEventListener('click', () => {
 const sectionCards = new Section(
   {items: initialCards,
   renderer: (element) => {
-    const card = new Card (element, templateSelector, imagePopupWindow.open);
+    const card = new Card (element, templateSelector, imagePopupWindow.open, popupCardRemove.open, (likeIcon, cardId) => {
+      if (likeIcon.classList.contains('element__button-like_active')) {
+        api.deleteLike(cardId)
+          .then(res => {
+            card.switchLike(res.likes);
+          })
+          .catch(error => {
+            console.error(`Ошибка при снятии лайка ${error}`)
+          })
+      }
+      else {
+        api.addLike(cardId)
+          .then(res => {
+            card.switchLike(res.likes);
+          })
+          .catch(error => {
+            console.error(`Ошибка при установке лайка ${error}`)
+          })
+      }
+    });
     return card.createCard();
   }},
   elementSelector
 )
 
-//add all cards
-sectionCards.addInitialCards();
+//get user and cards info, render cards
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([infoUser, infoCards]) => {
+    infoCards.forEach(element => {
+      element.userId = infoUser._id;
+    })
+    userInfo.setUserInfo(infoUser);
+    sectionCards.addInitialCards(infoCards);
+  })
+  .catch(error => {
+    console.error(`Ошибка запроса данных с сервера ${error}`)
+  })

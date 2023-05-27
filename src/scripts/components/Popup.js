@@ -4,6 +4,7 @@ export default class Popup {
         this._popup = document.querySelector(popupSelector);
         this._popupOpened = document.querySelector('.popup_opened');
         this._buttonClose = this._popup.querySelector('.popup__close');
+        this._formPopup = document.querySelector('.popup__content');
     }
   
     //open popup function

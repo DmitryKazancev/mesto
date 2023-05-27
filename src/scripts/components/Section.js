@@ -6,13 +6,13 @@ export default class Section {
         this._container = document.querySelector(containerSelector);
     }
 
-    //render cards on page 
-    addInitialCards () {
-        this._initialCards.reverse().forEach(element => {
+    //Render cards from array
+    addInitialCards (initialCards) {
+        initialCards.reverse().forEach(element => {
             this.addItem(this.renderer(element));
         })
     }
-
+    
     //add card to cards container
     addItem (element) {
         this._container.prepend(element);

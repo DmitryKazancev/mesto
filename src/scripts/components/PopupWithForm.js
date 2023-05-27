@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
       this._submitFormFunction = submitFormFunction;
       this._formWithInputs = this._popup.querySelector('.popup__content');
       this._inputsList = this._formWithInputs.querySelectorAll('.popup__input');
+      this._textSubmitButton = this._formWithInputs.querySelector('.popup__button');
     }
 
     //set event listeners for close and submit button popup
@@ -15,11 +16,17 @@ export default class PopupWithForm extends Popup {
         this._formWithInputs.addEventListener('submit', this._handleSubmitButton);
     }
 
+    //Set default text on submit button
+    setCurrentTextButton () {
+        this._textSubmitButton.textContent = 'Сохранить';
+    }
+
     //handle submit button function
     _handleSubmitButton = (evt) => {
         evt.preventDefault();
+        this._textSubmitButton.textContent = 'Сохранение...';
         this._submitFormFunction(this._getInputValues());
-        this.close();
+        this._setCurrentTextButton;
     }
 
     //get info from input fields

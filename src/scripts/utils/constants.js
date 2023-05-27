@@ -31,6 +31,7 @@ const buttonEdit = document.querySelector('.profile__button-edit');
 const buttonAdd = document.querySelector('.profile__button-add');
 const formElementAuthor = document.querySelector('.popup__content-author');
 const formElementCard = document.querySelector('.popup__content-card');
+const formElementAvatar = document.querySelector('.popup__content-avatar');
 const templateSelector = '#element';
 const elementSelector = '.elements';
 const nameAuthorSelector = '.profile__info-author';
@@ -38,6 +39,9 @@ const jobAuthorSelector = '.profile__info-description';
 const popupAuthorSelector = '.popup_author';
 const popupCardSelector = '.popup_card';
 const imagePopupSelector = '.popup_image';
+const popupAvatarSelector = '.popup_avatar';
+const popupCardRemoveSelector = '.popup_sure';
+const buttonUpdateAvatar = document.querySelector('.profile__button-avatar');
 
 
 //Configuration object
@@ -64,5 +68,9 @@ export {
   buttonEdit,
   buttonAdd,
   formElementAuthor,
-  formElementCard
+  formElementCard,
+  formElementAvatar,
+  popupAvatarSelector,
+  popupCardRemoveSelector,
+  buttonUpdateAvatar
 }
