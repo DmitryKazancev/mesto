@@ -1,6 +1,9 @@
 {
   "name": "yandex_praktikum",
   "version": "1.0.0",
+  "repository": {
+    "url": "git+https://github.com/DmitryKazancev/mesto.git"
+  },
   "description": "mesto",
   "main": "index.js",
   "scripts": {
