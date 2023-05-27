@@ -5,13 +5,14 @@ export default class PopupCardRemove extends Popup {
     constructor(popupSelector, submitFormFunction) {
         super(popupSelector);
         this._submitFormFunction = submitFormFunction;
-        this._popupFormRemove = document.querySelector('.popup__content-sure');
+        this._popupFormRemove = this._popup.querySelector('.popup__content-sure');
         this._textSubmitButton = this._popupFormRemove.querySelector('.popup__button');
+        this._originalTextSubmitButton = this._textSubmitButton.textContent;
     }
 
     //Set default text on submit button
     setCurrentTextButton () {
-        this._textSubmitButton.textContent = 'Да';
+        this._textSubmitButton.textContent = this._originalTextSubmitButton;
     }
 
     //Submit button function
@@ -27,16 +28,10 @@ export default class PopupCardRemove extends Popup {
         this._popupFormRemove.addEventListener('submit', this._handleSubmitButton);
     }
 
-    //Disable event listener for submit button
-    disableSubmitListener () {
-        this._popupFormRemove.removeEventListener('submit', this._handleSubmitButton);
-    }
-
     //Open popup
     open = ({elementCard, elementCardId}) => {
         super.open();
         this._element = elementCard;
         this._elementCardId = elementCardId;
-        this.setEventListeners();
     }
 }

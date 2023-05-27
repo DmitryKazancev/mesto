@@ -66,18 +66,15 @@ export default class Card {
 
     //Create card public method
     createCard() {
-        if (this._userId === this._ownerId) {
-            this._trashButton.style.display = 'block';
-        }
-        else {
-            this._trashButton.style.display = 'none';
+        if (this._userId !== this._ownerId) {
+            this._trashButton.remove();
         }
         this._setEventListeners();
         this._getStatusLike();
         return this._elementCard;
     }
 
-    //Switc status like
+    //Switch status like
     switchLike (likes) {
         this._likeIcon.classList.toggle('element__button-like_active');
         this._cardLikesQuantity.textContent = likes.length;

@@ -6,6 +6,16 @@ export default class Api {
         this._authorization = options.headers.authorization;
     }
 
+    //Get response function
+    _getResponseData(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        else {
+            return Promise.reject(`Ошибка: ${res.status}`);
+        }
+    }
+
     //get info about user
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
@@ -13,14 +23,7 @@ export default class Api {
                 authorization: this._authorization
             }
                 })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._getResponseData)
     }
 
     //get array cards
@@ -30,14 +33,7 @@ export default class Api {
                 authorization: this._authorization
             }
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._getResponseData)
     }
 
     //update info about user
@@ -50,14 +46,7 @@ export default class Api {
                 about: ownerInfo.jobInput
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._getResponseData)
     }
 
     //update user avatar
@@ -69,14 +58,7 @@ export default class Api {
                 avatar: ownerAvatar.linkAvatar
             })
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                else {
-                    return Promise.reject(`Ошибка: ${res.status}`);
-                }
-            })
+            .then(this._getResponseData)
     }
 
     //create new card
@@ -89,14 +71,7 @@ export default class Api {
                 link: cardInfo.link
             })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                return Promise.reject(`Ошибка: ${res.status}`);
-            }
-        })
+        .then(this._getResponseData)
     }
 
     //put like on card
@@ -105,14 +80,7 @@ export default class Api {
         method: 'PUT',
         headers: this._headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                return Promise.reject(`Ошибка: ${res.status}`);
-            }
-        })
+        .then(this._getResponseData)
     }
 
     //delete like on card
@@ -121,14 +89,7 @@ export default class Api {
         method: 'DELETE',
         headers: this._headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                return Promise.reject(`Ошибка: ${res.status}`);
-            }
-        })
+        .then(this._getResponseData)
     }
    
     //delete card created by user
@@ -137,13 +98,6 @@ export default class Api {
         method: 'DELETE',
         headers: this._headers
     })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            else {
-                return Promise.reject(`Ошибка: ${res.status}`);
-            }
-        })
+        .then(this._getResponseData)
     } 
 }

@@ -2,7 +2,7 @@
 import './pages/index.css';
 
 import { 
-  initialCards, 
+  initialCards,
   templateSelector, 
   elementSelector, 
   nameAuthorSelector, 
@@ -39,6 +39,7 @@ const api = new Api ({
 
 //image popup
 const imagePopupWindow = new PopupWithImage (imagePopupSelector);
+imagePopupWindow.setEventListeners();
 
 //info about author
 const userInfo = new UserInfo({nameAuthorSelector, jobAuthorSelector});
@@ -48,14 +49,17 @@ const popupCardRemove = new PopupCardRemove (popupCardRemoveSelector, ({elementC
   api.deleteCard(elementCardId)
     .then(() => {
       elementCard.removeCard();
-      popupCardRemove.disableSubmitListener();
       popupCardRemove.close();
-      popupCardRemove.setCurrentTextButton();
     })
     .catch(error => {
       console.error(`Ошибка при при удалении карточки ${error}`)
     })
+    .finally(() => {
+      popupCardRemove.setCurrentTextButton();
+    })
 })
+
+popupCardRemove.setEventListeners();
 
 //popup edit author
 const popupAuthor = new PopupWithForm (popupAuthorSelector, (inputsValues) => {
@@ -63,12 +67,16 @@ const popupAuthor = new PopupWithForm (popupAuthorSelector, (inputsValues) => {
     .then(res => {
       userInfo.setUserInfo(res);
       popupAuthor.close();
-      popupAuthor.setCurrentTextButton();
     })
     .catch(error => {
       console.error(`Ошибка при редактировании профиля автора ${error}`)
     })
+    .finally(() => {
+      popupAuthor.setCurrentTextButton();
+    })
 })
+
+popupAuthor.setEventListeners();
 
 //popup edit card
 const popupCard = new PopupWithForm (popupCardSelector, (inputsValues) => {
@@ -77,12 +85,16 @@ const popupCard = new PopupWithForm (popupCardSelector, (inputsValues) => {
       infoCard.userId = infoUser._id;
       sectionCards.addItem(sectionCards.renderer(infoCard))
       popupCard.close();
-      popupCard.setCurrentTextButton();
     })
     .catch(error => {
       console.error(`Ошибка при добавлении новой карточки ${error}`)
     })
+    .finally(() => {
+      popupCard.setCurrentTextButton();
+    })
 })
+
+popupCard.setEventListeners();
 
 //popup update avatar
 const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, (inputsValues) => {
@@ -90,12 +102,16 @@ const popupUpdateAvatar = new PopupWithForm(popupAvatarSelector, (inputsValues) 
     .then(res => {
       userInfo.setUserInfo(res);
       popupUpdateAvatar.close();
-      popupUpdateAvatar.setCurrentTextButton();
     } )
     .catch(error => {
       console.error(`Ошибка при изменении аватара автора ${error}`)
     })
+    .finally(() => {
+      popupUpdateAvatar.setCurrentTextButton();
+    })
 })
+
+popupUpdateAvatar.setEventListeners();
 
 //Set validation to popup forms
 const cardAddFormValidation = new FormValidator (validationConfig, formElementCard);
@@ -111,7 +127,6 @@ avatarUpdateFormValidation.enableValidation();
 buttonUpdateAvatar.addEventListener('click', () => {
   popupUpdateAvatar.open();
   avatarUpdateFormValidation.deleteInputError();
-  popupUpdateAvatar.setEventListeners();
   avatarUpdateFormValidation.disableButton();
 })
 
@@ -120,7 +135,6 @@ buttonEdit.addEventListener('click', () => {
     popupAuthor.setInputValues(userInfo.getUserInfo());
     popupAuthor.open();
     authorEditFormValidation.deleteInputError();
-    popupAuthor.setEventListeners();
     authorEditFormValidation.disableButton();
 });
 
@@ -128,7 +142,6 @@ buttonEdit.addEventListener('click', () => {
 buttonAdd.addEventListener('click', () => {
   popupCard.open();
   cardAddFormValidation.deleteInputError();
-  popupCard.setEventListeners();
   cardAddFormValidation.disableButton();
 });
 
