@@ -1,5 +1,5 @@
 //Imports
-import './pages/index.css';
+import './index.css';
 
 import { 
   initialCards,
@@ -18,15 +18,15 @@ import {
   formElementAvatar,
   popupAvatarSelector,
   popupCardRemoveSelector,
-  buttonUpdateAvatar } from './scripts/utils/constants.js';
-import Card from './scripts/components/Card.js';
-import FormValidator from './scripts/components/FormValidator.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import Section from './scripts/components/Section.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
-import PopupCardRemove from './scripts/components/PopupCardRemove.js';
-import Api from './scripts/components/Api.js';
+  buttonUpdateAvatar } from '../components/utils/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupCardRemove from '../components/PopupCardRemove.js';
+import Api from '../components/Api.js';
 
 //class api for connect to server
 const api = new Api ({
