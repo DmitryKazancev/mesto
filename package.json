@@ -2,7 +2,7 @@
   "name": "yandex_praktikum",
   "version": "1.0.0",
   "repository": {
-    "url": "git+https://github.com/DmitryKazancev/mesto.git"
+    "url": "git+https://github.com/dmitrykazancev/mesto.git"
   },
   "description": "mesto",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d ./dist"
   },
   "author": "Dmitry Kazantsev",
   "license": "ISC",
